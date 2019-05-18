@@ -8,30 +8,32 @@ class Body extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+            userName: ''
         }
         this.updateBody = this.updateBody.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleLogin() {
+    handleLogin(usn) {
         this.setState({
-            isLoggedIn: true
+            isLoggedIn: true,
+            userName: usn
         })
     }
 
     handleLogout() {
-        this.setState = {
+        this.setState({
             isLoggedIn: false
-        }
+        })
     }
 
     updateBody(){
         if(this.state.isLoggedIn){
             return(
                 <div>
-                    <MainPage />
+                    <MainPage usn={this.state.userName}/>
                 </div>
             )
         } else {
@@ -53,10 +55,6 @@ class Body extends React.Component {
 }
 
 class ToRender extends React.Component {
-
-    constructor(props){
-        super(props);
-    }
 
     render() {
         return (
