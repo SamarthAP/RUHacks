@@ -8,6 +8,24 @@ exports.users_get = function (req, res) {
     });
 }
 
+exports.user_get = function (req, res) {
+    User.find({username: req.params.username}, function (err, user) {
+        if (err) return next(err);
+        res.send(user);
+    })
+}
+
+exports.create_user = function (req, res) {
+    let user = new User({
+        username: req.body.username,
+        bills: []
+    });
+    user.save(function(err) {
+        if (err) return next(err);
+        res.send(user)
+    })
+}
+
 exports.analyse = async function analyse(req, res) {
     // Creates a client
     const client = new vision.ImageAnnotatorClient();
