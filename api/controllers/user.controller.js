@@ -43,3 +43,18 @@ exports.analyse = async function analyse(req, res) {
 
     res.send(detections);
 }
+
+exports.add_bill = function (req, res) {
+    new_bill = {
+        vendor: req.body.vendor,
+        date: req.body.date,
+        transaction_type: req.body.transaction_type,
+        total: req.body.total 
+    };
+    User.findOneAndUpdate({username: req.params.username}, 
+        {$push: {bills: new_bill}}, 
+        function (err, user) {
+            if (err) return next(err);
+            res.send(user);
+        });
+}
