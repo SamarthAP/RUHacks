@@ -47,7 +47,7 @@ export class Login extends React.Component{
                 </label>
                 <br/>
                 <br/>
-                <input type="submit" value="Submit" />
+                <button onClick={this.props.handler}>Submit</button>
             </form>
         );
     }
