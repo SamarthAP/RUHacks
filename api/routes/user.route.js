@@ -7,6 +7,7 @@ router.get('/all', user_controller.users_get);
 router.get('/:username/get', user_controller.user_get);
 router.get('/analyse', user_controller.analyse);
 router.post('/create', user_controller.create_user);
+router.post('/upload', user_controller.upload);
 router.put('/:username/addbill', user_controller.add_bill);
 
 module.exports = router;
