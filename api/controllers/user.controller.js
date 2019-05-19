@@ -14,7 +14,27 @@ exports.users_get = function (req, res) {
 exports.user_get = function (req, res) {
     User.find({username: req.params.username}, function (err, user) {
         if (err) return next(err);
-        res.send(user);
+        //res.send(user);
+        if (user.length) {
+            res.send(user)
+        } else {
+            let user = new User({
+                username: req.params.username,
+                bills: []
+            });
+            user.save(function(err) {
+                if (err) res.send(err);
+                res.send(user)
+            })
+        }
+    })
+}
+
+exports.get_bills = function (req, res) {
+    User.find({username: req.params.username}, function (err, user) {
+        if (user) {
+            res.send(user[0].bills)
+        } 
     })
 }
 

@@ -13,6 +13,7 @@ export class MainPage extends React.Component {
         };
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
+        this.onProcessHandler = this.onProcessHandler.bind(this);
     }
     
     // <div>
@@ -63,12 +64,78 @@ export class MainPage extends React.Component {
         });
     }
 
-    OnProcessHandler = async function() {
-        return new Promise((resolve, reject) => {
-            const req = new XMLHttpRequest();
-            req.open("GET", "http://localhost:1111/api/analyse");
-            req.send();
-        });
+    onProcessHandler() {
+        axios.get('http://localhost:1111/api/analyse')
+        .then(res => {
+            const obj = res.data;
+            const vendor = obj[1].description;
+            let date;
+            
+            // Date
+            let regex = /[0-9]+\/[0-9][0-9]\/[0-9][0-9][0-9][0-9]?$/;
+
+            for (var i in obj){
+                if(regex.test(obj[i].description)){
+                    date = regex.exec(obj[i].description);
+                    break;
+                }
+            }
+
+            if (!date) {
+                regex = /[0-9]+\/[0-9][0-9]\/[0-9][0-9]?$/;
+                for (var i in obj){
+                    if(regex.test(obj[i].description)){
+                        date = regex.exec(obj[i].description);
+                        break;
+                    }
+                }
+            }
+            
+            let type;
+
+            for (var i in obj){
+                if(/[dD][eE][bB][iI][tT]/.test(obj[i].description)){
+                    type = "Debit";
+                    break;
+                }else if(/[cC][rR][eE][dD][iI][tT]/.test(obj[i].description) || /[vV][iI][sS][aA]/.test(obj[i].description) || /[cC][aA][rR][dD]/.test(obj[i].description)){
+                    type = "Credit";
+                    break;
+                } 
+            }
+            if (!type) type="Cash";
+
+            let value;
+
+            //regex = /^[0-9]+\.([0-9][0-9])?$/;
+            regex = /[0-9]+\.[0-9][0-9]/;
+            var arr = [];
+        
+            for (var i in obj){
+                if(regex.test(obj[i].description)){
+                    let match = regex.exec(obj[i].description);
+                    arr.push(match);
+                }
+            }
+
+            console.log(arr);
+        
+            arr.sort((a, b) => {return a-b});
+
+            console.log(arr);
+            
+            
+            value = arr[arr.length - 1];
+            
+            let bill = {
+                vendor: vendor,
+                date: date,
+                transaction_type: type,
+                total: parseInt(value, 10)
+            }
+
+            // this.props.usn
+            axios.put('http://localhost:1111/api/' + this.props.usn + '/addbill', bill)
+        })
     }
 
     render() {
@@ -101,7 +168,7 @@ export class MainPage extends React.Component {
                         </div>
                     </div>
                     <div className="process">
-                        <button onClick={this.OnProcessHandler}>Process</button>
+                        <button onClick={this.onProcessHandler}>Process</button>
                     </div>
                 </body>
             </html>
