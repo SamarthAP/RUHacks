@@ -63,6 +63,14 @@ export class MainPage extends React.Component {
         });
     }
 
+    OnProcessHandler = async function() {
+        return new Promise((resolve, reject) => {
+            const req = new XMLHttpRequest();
+            req.open("GET", "http://localhost:1111/api/analyse");
+            req.send();
+        });
+    }
+
     render() {
         return(
             <html>
@@ -91,6 +99,9 @@ export class MainPage extends React.Component {
                                 <p>Total:</p>
                             </div>
                         </div>
+                    </div>
+                    <div className="process">
+                        <button onClick={this.OnProcessHandler}>Process</button>
                     </div>
                 </body>
             </html>
