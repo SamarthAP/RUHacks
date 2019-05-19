@@ -1,5 +1,6 @@
 import React from 'react';
 import './login.css';
+import logo from '../logo.png';
 
 export class Login extends React.Component{
 
@@ -34,21 +35,36 @@ export class Login extends React.Component{
 
     render() {
         return (
-            <form className="main-form" onSubmit={this.handleSubmit}>
-                <label className="username-input">
-                    Username: 
-                    <input type="text" value={this.state.value} onChange={this.handleUsername} />
-                </label>
-                <br/>
-                <br/>
-                <label className="password-input">
-                    Password: 
-                    <input type="password" value={this.state.value} onChange={this.handlePassword} />
-                </label>
-                <br/>
-                <br/>
-                <button onClick={() => this.props.handler(this.state.userName)}>Submit</button>
-            </form>
+            <div> 
+                <div>
+                    <ul className="navbar">
+                        <li className="navelement">About</li>
+                        <li className="navelement">History</li>
+                        <li className="navelement">Stats</li>
+                        <li className="navelement">Home</li>
+                        <li><img className="logo" src={logo} alt=""/></li>
+                    </ul>
+                </div>
+                <div className="main-form">
+                    <h2>Please enter credentials</h2>
+                    <form className="login-form" onSubmit={this.handleSubmit}>
+                        <label className="username-input">
+                            Username: 
+                            <input type="text" value={this.state.value} onChange={this.handleUsername} />
+                        </label>
+                        <br/>
+                        <br/>
+                        <label className="password-input">
+                            Password: 
+                            <input type="password" value={this.state.value} onChange={this.handlePassword} />
+                        </label>
+                        <br/>
+                        <br/>
+                        <button id="login-button" onClick={() => this.props.handler(this.state.userName)}>Log In</button>
+                    </form>
+                </div>
+              
+            </div>            
         );
     }
 }

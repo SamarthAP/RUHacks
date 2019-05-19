@@ -1,3 +1,49 @@
-.main-form {
+.navbar {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #D2B4DE;
+    margin: 0;
+}
 
+.navelement {
+    float: right;
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 1.5rem 2.25rem;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navelement:hover {
+    background-color: rgb(177, 151, 187);
+}
+
+.logo {
+    height: 3rem;
+    width: auto;
+    padding-top: 0.5rem;
+}
+
+.main-form {
+    margin-top: 10rem;
+    margin-left: 32rem;
+}
+
+.login-form label input {
+    float: right;
+    margin-right: 32rem;
+    border-radius: 7px;
+}
+
+#login-button {
+    height: 2rem;
+    width: 4rem;
+    font-size: 14px;
+    background-color: blanchedalmond;
+    border-radius: 7px;
+}
+
+#login-button:hover {
+    background-color: burlywood;
 }
