@@ -34,7 +34,7 @@ export class Login extends React.Component{
 
     render() {
         return (
-            <form class="main-form" onSubmit={this.handleSubmit}>
+            <form className="main-form" onSubmit={this.handleSubmit}>
                 <label className="username-input">
                     Username: 
                     <input type="text" value={this.state.value} onChange={this.handleUsername} />

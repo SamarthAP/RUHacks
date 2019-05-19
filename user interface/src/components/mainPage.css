@@ -1,0 +1,44 @@
+* {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.navbar {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #D2B4DE;
+    margin: 0;
+}
+
+.navelement {
+    float: right;
+    display: block;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 1.5rem 2.25rem;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.navelement:hover {
+    background-color: rgb(177, 151, 187);
+}
+
+.logo {
+    height: 3rem;
+    width: auto;
+    padding-top: 0.5rem;
+}
+
+.upload {
+
+    float: left;
+    margin: 2rem;
+}
+
+.chooseButton {
+
+}

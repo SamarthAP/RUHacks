@@ -20,9 +20,9 @@ db.on('disconnected', function() {
 });
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})) // Check what urlencoded does
-app.use(cors());
 app.use('/api', user)
 
 let port = 1111;

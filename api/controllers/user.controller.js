@@ -1,8 +1,8 @@
 const User = require('../models/user.model');
 const vision = require('@google-cloud/vision');
 const fs = require('fs');
-const path = require('path');
-const formidable = require('formidable');
+//const formidable = require('formidable');
+const multer = require('multer');
 
 exports.users_get = function (req, res) {
     User.find({}, function (err, items) {
@@ -36,13 +36,18 @@ exports.analyse = async function analyse(req, res) {
     /**
      * TODO(developer): Uncomment the following line before running the sample.
      */
-    const fileName = 'assets/test3.jpg';
+
+    //const fileName = 'assets/image.JPG';
+    var fileName = 'assets/';
+    
+    const folder = './assets/';
+    fileName += fs.readdirSync(folder)[1]
 
     // Performs text detection on the local file
     const [result] = await client.textDetection(fileName);
     const detections = result.textAnnotations;
-    console.log('Text:');
-    detections.forEach(text => console.log(text));    
+    //console.log('Text:');
+    //detections.forEach(text => console.log(text));    
 
     res.send(detections);
 }
@@ -65,15 +70,32 @@ exports.add_bill = function (req, res) {
 exports.upload = function (req, res) {
     // console.log(path.extname(req.body.file));
     
-    var form = new formidable.IncomingForm();
-    form.parse(req, function (err, fields, files) {
-        var oldpath = files.file.path;
-        var newpath = './' + files.file.name;
-        fs.rename(oldpath, newpath, function (err) {
-            if (err) throw err;
-            res.end();
-        });
-    });
+    // var form = new formidable.IncomingForm();
+    // form.parse(req, function (err, fields, files) {
+    //     var oldpath = files.file.path;
+    //     var newpath = './' + files.file.name;
+    //     fs.rename(oldpath, newpath, function (err) {
+    //         if (err) throw err;
+    //         res.end();
+    //     });
+    // });
+
     // console.log(req.body);
     // console.log(req.file.thumbnail);
+
+    // var storage = multer.diskStorage({
+    //     destination: function (req, file, cb) {
+    //         cb(null, '/assets')
+    //     },
+    //     filename: function (req, file, cb) {
+    //         console.log(file.filename)
+    //         cb(null, '----' + file.originalname)
+    //     }
+    // })
+
+    // var upload = multer({storage: storage}).single('file');
+    // console.log(upload);
+    
+    // res.send('uploaded')
+
 }
