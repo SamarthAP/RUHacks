@@ -1,5 +1,8 @@
 const User = require('../models/user.model');
 const vision = require('@google-cloud/vision');
+const fs = require('fs');
+const path = require('path');
+const formidable = require('formidable');
 
 exports.users_get = function (req, res) {
     User.find({}, function (err, items) {
@@ -27,14 +30,13 @@ exports.create_user = function (req, res) {
 }
 
 exports.analyse = async function analyse(req, res) {
-    console.log('dsfdsf')
     // Creates a client
     const client = new vision.ImageAnnotatorClient();
 
     /**
      * TODO(developer): Uncomment the following line before running the sample.
      */
-    const fileName = 'assets/test.jpeg';
+    const fileName = 'assets/test3.jpg';
 
     // Performs text detection on the local file
     const [result] = await client.textDetection(fileName);
@@ -58,4 +60,20 @@ exports.add_bill = function (req, res) {
             if (err) return next(err);
             res.send(user);
         });
+}
+
+exports.upload = function (req, res) {
+    // console.log(path.extname(req.body.file));
+    
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        var oldpath = files.file.path;
+        var newpath = './' + files.file.name;
+        fs.rename(oldpath, newpath, function (err) {
+            if (err) throw err;
+            res.end();
+        });
+    });
+    // console.log(req.body);
+    // console.log(req.file.thumbnail);
 }
