@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+* {
+    font-family: Montserrat, Arial, Helvetica, sans-serif;
+}
+
 .navbar {
     list-style-type: none;
     overflow: hidden;
-    background-color: #D2B4DE;
+    background-color: rgb(74, 116, 255);
     margin: 0;
 }
 
@@ -33,17 +39,16 @@
 .login-form label input {
     float: right;
     margin-right: 32rem;
-    border-radius: 7px;
 }
 
 #login-button {
     height: 2rem;
     width: 4rem;
     font-size: 14px;
-    background-color: blanchedalmond;
+    background-color: white;
     border-radius: 7px;
 }
 
 #login-button:hover {
-    background-color: burlywood;
+    background-color: rgb(74, 116, 255);
 }

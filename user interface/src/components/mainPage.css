@@ -6,10 +6,36 @@ body {
     margin: 0;
 }
 
+table {
+    border-spacing: 1; 
+    border-collapse: collapse; 
+    background:white;
+    border-radius:6px;
+    overflow:hidden;
+    max-width:800px; 
+    width:100%;
+    margin:0 auto;
+    position:relative;
+}
+
+th {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+tr {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+td {
+    padding: 0.5rem;
+}
+
 .navbar {
     list-style-type: none;
     overflow: hidden;
-    background-color: #D2B4DE;
+    background-color: rgb(74, 116, 255);
     margin: 0;
 }
 
@@ -24,7 +50,7 @@ body {
 }
 
 .navelement:hover {
-    background-color: rgb(177, 151, 187);
+    background-color: rgb(59, 93, 204);
 }
 
 .logo {
@@ -41,4 +67,12 @@ body {
 
 .chooseButton {
 
+}
+
+#table {
+    float: right;
+    margin: 2rem 8rem;
+    padding: 1rem;
+
+    border-radius: 10px;
 }

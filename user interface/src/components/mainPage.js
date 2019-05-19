@@ -187,19 +187,17 @@ export class MainPage extends React.Component {
                            
                             <input type="file" name="file" onChange={this.onChangeHandler}/>
                             <button onClick={this.onClickHandler}>Upload</button>
-                           
-                            
-
+                            <div className="process">
+                            <button onClick={this.onProcessHandler}>Process</button>
+                            </div>
                             <div>
-                                <p>Your current upload:</p>
+                                {/*<p>Your current upload:</p>*/}
                                 {/* Add image here*/}
-                                <p>Total:</p>
+                                {/*<p>Total:</p>*/}
                             </div>
                         </div>
                     </div>
-                    <div className="process">
-                        <button onClick={this.onProcessHandler}>Process</button>
-                    </div>
+                    
 
                     <div>
                         <table id="table">
