@@ -14,6 +14,7 @@ export class MainPage extends React.Component {
         this.onChangeHandler = this.onChangeHandler.bind(this);
         this.onClickHandler = this.onClickHandler.bind(this);
         this.onProcessHandler = this.onProcessHandler.bind(this);
+        this.updateTable = this.updateTable.bind(this);
     }
     
     // <div>
@@ -131,14 +132,26 @@ export class MainPage extends React.Component {
             // this.props.usn
             axios.put('http://localhost:1111/api/' + this.props.usn + '/addbill', bill)
                 .then(res => {
-                    updateTable(res.data.bills)
+                    console.log(res.data.bills);
+                    
+                    axios.get('http://localhost:1111/api/' + this.props.usn + '/getbills', {})
+                    .then(res => {
+                        this.updateTable(res.data);
+                    })
                 });
        
         })
     }
 
     updateTable(bills){
+
         var table = document.getElementById('table')
+        table.innerHTML = `<tr>
+            <th>Vendor</th>
+            <th>Date</th>
+            <th>Transaction Type</th>
+            <th>Total </th>
+            </tr>`;
         for (var i in bills){
             var tr = document.createElement('tr');
             tr.innerHTML = '<td>' + bills[i].vendor + '</td><td>' + bills[i].date + '</td><td>' + bills[i].transaction_type + '</td><td>' + bills[i].total + '</td>'
@@ -146,6 +159,12 @@ export class MainPage extends React.Component {
         }
     }
 
+    componentDidMount() {
+        axios.get('http://localhost:1111/api/' + this.props.usn + '/getbills', {})
+            .then(res => {
+                this.updateTable(res.data);
+            })
+    }
 
     render() {
         return(
@@ -169,6 +188,8 @@ export class MainPage extends React.Component {
                             <input type="file" name="file" onChange={this.onChangeHandler}/>
                             <button onClick={this.onClickHandler}>Upload</button>
                            
+                            
+
                             <div>
                                 <p>Your current upload:</p>
                                 {/* Add image here*/}
@@ -181,7 +202,14 @@ export class MainPage extends React.Component {
                     </div>
 
                     <div>
-                        
+                        <table id="table">
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Total </th>
+                            </tr>
+                        </table>
                     </div>
                 </body>
             </html>
