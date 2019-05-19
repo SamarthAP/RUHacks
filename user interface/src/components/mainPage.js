@@ -135,6 +135,11 @@ export class MainPage extends React.Component {
 
             // this.props.usn
             axios.put('http://localhost:1111/api/' + this.props.usn + '/addbill', bill)
+                .then(res => {
+                    console.log(res)
+                })
+
+        
         })
     }
 
@@ -169,6 +174,17 @@ export class MainPage extends React.Component {
                     </div>
                     <div className="process">
                         <button onClick={this.onProcessHandler}>Process</button>
+                    </div>
+
+                    <div>
+                        <table id="table">
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Date</th>
+                                <th>Transaction Type</th>
+                                <th>Total</th>
+                            </tr>
+                        </table>
                     </div>
                 </body>
             </html>
