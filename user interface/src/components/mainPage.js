@@ -131,18 +131,21 @@ export class MainPage extends React.Component {
             // this.props.usn
             axios.put('http://localhost:1111/api/' + this.props.usn + '/addbill', bill)
                 .then(res => {
-                    console.log(res.data.bills)
-                    var table = document.getElementById('table')
-                    for (var i in data){
-                        var tr = document.createElement('tr');
-                        tr.innerHTML = '<td>' + i.vendor + '</td><td>' + i.date + '</td><td>' + i.transaction_type + '</td><td>' + i.total + '</td>'
-                        table.appendChild(tr)
-                    }
-                    
+                    updateTable(res.data.bills)
                 });
        
         })
     }
+
+    updateTable(bills){
+        var table = document.getElementById('table')
+        for (var i in bills){
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + bills[i].vendor + '</td><td>' + bills[i].date + '</td><td>' + bills[i].transaction_type + '</td><td>' + bills[i].total + '</td>'
+            table.appendChild(tr)
+        }
+    }
+
 
     render() {
         return(
@@ -178,14 +181,7 @@ export class MainPage extends React.Component {
                     </div>
 
                     <div>
-                        <table id="table">
-                            <tr>
-                                <th>Vendor</th>
-                                <th>Date</th>
-                                <th>Transaction Type</th>
-                                <th>Total</th>
-                            </tr>
-                        </table>
+                        
                     </div>
                 </body>
             </html>
