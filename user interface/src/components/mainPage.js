@@ -117,12 +117,7 @@ export class MainPage extends React.Component {
                 }
             }
 
-            console.log(arr);
-        
             arr.sort((a, b) => {return a-b});
-
-            console.log(arr);
-            
             
             value = arr[arr.length - 1];
             
@@ -136,7 +131,7 @@ export class MainPage extends React.Component {
             // this.props.usn
             axios.put('http://localhost:1111/api/' + this.props.usn + '/addbill', bill)
                 .then(res => {
-                    console.log(res)
+                    console.log(res.data.bills)
                 })
 
         
