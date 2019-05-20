@@ -126,7 +126,7 @@ export class MainPage extends React.Component {
                 vendor: vendor,
                 date: date,
                 transaction_type: type,
-                total: parseInt(value, 10)
+                total: parseFloat(value, 10)
             }
 
             // this.props.usn

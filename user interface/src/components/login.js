@@ -39,9 +39,6 @@ export class Login extends React.Component{
                 <div>
                     <ul className="navbar">
                         <li className="navelement">About</li>
-                        <li className="navelement">History</li>
-                        <li className="navelement">Stats</li>
-                        <li className="navelement">Home</li>
                         <li><img className="logo" src={logo} alt=""/></li>
                     </ul>
                 </div>

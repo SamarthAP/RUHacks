@@ -6,14 +6,14 @@ const multer = require('multer');
 
 exports.users_get = function (req, res) {
     User.find({}, function (err, items) {
-        if (err) return next(err);
+        if (err) return res.send(err);
         res.send(items);
     });
 }
 
 exports.user_get = function (req, res) {
     User.find({username: req.params.username}, function (err, user) {
-        if (err) return next(err);
+        if (err) return res.send(err);
         //res.send(user);
         if (user.length) {
             res.send(user)
@@ -44,7 +44,7 @@ exports.create_user = function (req, res) {
         bills: []
     });
     user.save(function(err) {
-        if (err) return next(err);
+        if (err) return res.send(err);
         res.send(user)
     })
 }
@@ -82,7 +82,7 @@ exports.add_bill = function (req, res) {
     User.findOneAndUpdate({username: req.params.username}, 
         {$push: {bills: new_bill}}, 
         function (err, user) {
-            if (err) return next(err);
+            if (err) return res.send(err);
             res.send(user);
         });
 }
